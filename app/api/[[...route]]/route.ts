@@ -13,19 +13,19 @@ const app = new Hono().basePath("/api");
 app.route("/books", books);
 app.route("/authors", authors);
 
-// app.get("/hello", clerkMiddleware(), (c) => {
-//   const auth = getAuth(c);
+app.get("/hello", clerkMiddleware(), (c) => {
+  const auth = getAuth(c);
 
-//   if (!auth?.userId) {
-//     return c.json({
-//       error: "Unauthorized access",
-//     });
-//   }
-//   return c.json({
-//     message: "Hello Next.js!",
-//     userId: auth.userId,
-//   });
-// });
+  if (!auth?.userId) {
+    return c.json({
+      error: "Unauthorized access",
+    });
+  }
+  return c.json({
+    message: "Hello Next.js!",
+    userId: auth.userId,
+  });
+});
 // .get(
 //   "/hello/:name",
 //   zValidator(
